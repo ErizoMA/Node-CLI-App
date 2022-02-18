@@ -13,6 +13,10 @@ class Tasks {
     });
     return list;
   }
+
+  loadTasks(list = []) {
+    list.forEach((task) => (this._list[task.id] = task));
+  }
   createTask(description) {
     const task = new Task(description);
     this._list[task.id] = task;
