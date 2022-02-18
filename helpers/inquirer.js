@@ -7,36 +7,36 @@ const menuOptions = {
   choices: [
     {
       value: "1",
-      name: "1. Create a task",
+      name: `${"1.".green} Create a task`,
     },
     {
       value: "2",
-      name: "2. List of tasks",
+      name: `${"2.".green} List of tasks`,
     },
     {
       value: "3",
-      name: "3. List of completed tasks",
+      name: `${"3.".green} List of completed tasks`,
     },
     {
       value: "4",
-      name: "4. Complete a task(s)",
+      name: `${"4.".green} Complete a task(s)`,
     },
     {
       value: "5",
-      name: "5. Delete a task",
+      name: `${"5.".green} Delete a task`,
     },
     {
       value: "0",
-      name: "0. Exit",
+      name: `${"6.".green} Exit`,
     },
   ],
 };
 
 const inquirerMenu = async () => {
   console.clear();
-  console.log("=".repeat(10).green);
-  console.log("ToDos MENU".green);
-  console.log("=".repeat(10).green + "\n");
+  console.log("=".repeat(20).green);
+  console.log("     ToDos MENU".white);
+  console.log("=".repeat(20).green + "\n");
 
   const { option } = await inquirer.prompt(menuOptions);
   return option;
@@ -44,12 +44,24 @@ const inquirerMenu = async () => {
 
 const pause = async () => {
   console.log("\n");
-  const { option } = await inquirer.prompt({
+  await inquirer.prompt({
     type: "input",
     name: "option",
     message: `Press ${"ENTER".green} to continue`,
   });
-  return option;
 };
 
-module.exports = { inquirerMenu, pause };
+const userInput = async (message) => {
+  const { input } = await inquirer.prompt({
+    type: "input",
+    name: "input",
+    message,
+    validate(value) {
+      if (value.length === 0) return "Type something to continue ...";
+      return true;
+    },
+  });
+  return input;
+};
+
+module.exports = { inquirerMenu, pause, userInput };
