@@ -8,7 +8,6 @@ const menuOptions = {
     {
       value: "1",
       name: "1. Create a task",
-      short: "short",
     },
     {
       value: "2",
@@ -35,12 +34,22 @@ const menuOptions = {
 
 const inquirerMenu = async () => {
   console.clear();
-  console.log("=".repeat(16).green);
-  console.log("Choose an option".green);
-  console.log("=".repeat(16).green + "\n");
+  console.log("=".repeat(10).green);
+  console.log("ToDos MENU".green);
+  console.log("=".repeat(10).green + "\n");
 
   const { option } = await inquirer.prompt(menuOptions);
   return option;
 };
 
-module.exports = { inquirerMenu };
+const pause = async () => {
+  console.log("\n");
+  const { option } = await inquirer.prompt({
+    type: "input",
+    name: "option",
+    message: `Press ${"ENTER".green} to continue`,
+  });
+  return option;
+};
+
+module.exports = { inquirerMenu, pause };
