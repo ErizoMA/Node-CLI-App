@@ -23,6 +23,18 @@ const showMenu = () => {
   });
 };
 
+const pause = () => {
+  const readline = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  readline.question(`Press ${"ENTER".green} to continue`, (option) => {
+    readline.close();
+  });
+};
+
 module.exports = {
   showMenu,
+  pause,
 };
