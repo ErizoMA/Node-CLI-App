@@ -1,5 +1,10 @@
 require("colors");
-const { inquirerMenu, pause, userInput } = require("./helpers/inquirer");
+const {
+  inquirerMenu,
+  pause,
+  userInput,
+  listOfTasks,
+} = require("./helpers/inquirer");
 const { saveData, readData } = require("./helpers/store");
 const Tasks = require("./models/tasks");
 console.clear();
@@ -26,6 +31,12 @@ const main = async () => {
         break;
       case "4":
         tasks.tasksByStatus(false);
+        break;
+      case "5":
+        break;
+      case "6":
+        const id = await listOfTasks(tasks.listArray);
+        console.log(id);
         break;
 
       default:
