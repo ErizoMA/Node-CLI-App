@@ -11,23 +11,28 @@ const menuOptions = {
     },
     {
       value: "2",
-      name: `${"2.".green} List of tasks`,
+      name: `${"2.".green} Show tasks`,
     },
     {
       value: "3",
-      name: `${"3.".green} List of completed tasks`,
+      name: `${"3.".green} Completed tasks`,
     },
     {
       value: "4",
-      name: `${"4.".green} Complete a task(s)`,
+      name: `${"4.".green} Pending tasks`,
     },
     {
       value: "5",
-      name: `${"5.".green} Delete a task`,
+      name: `${"5.".green} Complete a task(s)`,
+    },
+
+    {
+      value: "6",
+      name: `${"6.".green} Delete a task`,
     },
     {
       value: "0",
-      name: `${"6.".green} Exit`,
+      name: `${"0.".green} Exit`,
     },
   ],
 };

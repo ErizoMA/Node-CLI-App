@@ -1,3 +1,4 @@
+require("colors");
 const Task = require("./task");
 
 class Tasks {
@@ -20,6 +21,30 @@ class Tasks {
   createTask(description) {
     const task = new Task(description);
     this._list[task.id] = task;
+  }
+
+  allTasks() {
+    this.listArray.map((task) => {
+      console.log(
+        `${(this.listArray.indexOf(task) + 1).toString().green}. ${
+          task.description
+        } :: ${task.completedDate ? "Completed".green : "Pending".red}`
+      );
+    });
+  }
+
+  tasksByStatus(completed = true) {
+    const filteredTasks = this.listArray.filter((task) =>
+      completed ? task.completedDate !== null : task.completedDate === null
+    );
+
+    filteredTasks.map((task) => {
+      console.log(
+        `${(filteredTasks.indexOf(task) + 1).toString().green}. ${
+          task.description
+        } :: ${task.completedDate ? "Completed".green : "Pending".red}`
+      );
+    });
   }
 }
 
