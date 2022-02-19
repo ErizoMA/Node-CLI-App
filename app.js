@@ -4,6 +4,7 @@ const {
   pause,
   userInput,
   listOfTasks,
+  confirm,
 } = require("./helpers/inquirer");
 const { saveData, readData } = require("./helpers/store");
 const Tasks = require("./models/tasks");
@@ -36,7 +37,10 @@ const main = async () => {
         break;
       case "6":
         const id = await listOfTasks(tasks.listArray);
-        console.log(id);
+        const confirmed = await confirm("Are you sure?");
+        if (confirmed) {
+          tasks.deleteTask(id);
+        }
         break;
 
       default:

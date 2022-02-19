@@ -72,7 +72,7 @@ const userInput = async (message) => {
 const listOfTasks = async (list = []) => {
   const choices = list.map((task) => {
     return {
-      value: list.indexOf(task) + 1,
+      value: task.id,
       name: `${list.indexOf(task) + 1}.`.green + ` ${task.description}`,
     };
   });
@@ -86,4 +86,13 @@ const listOfTasks = async (list = []) => {
   return id;
 };
 
-module.exports = { inquirerMenu, pause, userInput, listOfTasks };
+const confirm = async (message) => {
+  const { ok } = await inquirer.prompt({
+    type: "confirm",
+    name: "ok",
+    message,
+  });
+  return ok;
+};
+
+module.exports = { inquirerMenu, pause, userInput, listOfTasks, confirm };
