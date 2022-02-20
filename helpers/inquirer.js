@@ -3,27 +3,32 @@ const inquirer = require("inquirer");
 const menuOptions = {
   type: "list",
   name: "option",
-  message: "¿Chose an option ?",
+  message: "¿Choose an option?",
   choices: [
     {
       value: "1",
       name: `${"1.".green} Create a task`,
+      short: "Type your task below".italic,
     },
     {
       value: "2",
       name: `${"2.".green} Show tasks`,
+      short: "List of tasks".italic,
     },
     {
       value: "3",
       name: `${"3.".green} Completed tasks`,
+      short: "Completed tasks".italic,
     },
     {
       value: "4",
       name: `${"4.".green} Pending tasks`,
+      short: "Pending tasks".italic,
     },
     {
       value: "5",
       name: `${"5.".green} Complete a task(s)`,
+      short: "".hidden,
     },
 
     {
@@ -32,7 +37,8 @@ const menuOptions = {
     },
     {
       value: "0",
-      name: `${"0.".green} Exit`,
+      name: `${"7.".green} Exit`,
+      short: "Leaving...".italic,
     },
   ],
 };
@@ -73,8 +79,13 @@ const listOfTasks = async (list = []) => {
   const choices = list.map((task) => {
     return {
       value: task.id,
-      name: `${list.indexOf(task) + 1}.`.green + ` ${task.description}`,
+      name: `${list.indexOf(task) + 1}.`.green + ` ${task?.description}`,
     };
+  });
+  choices.push({
+    value: 0,
+    name: `${list.length + 1}.`.green + " Exit",
+    short: "".hidden,
   });
   const questions = {
     type: "list",
@@ -95,4 +106,30 @@ const confirm = async (message) => {
   return ok;
 };
 
-module.exports = { inquirerMenu, pause, userInput, listOfTasks, confirm };
+const tasksToChangeStatus = async (list = []) => {
+  const choices = list.map((task) => {
+    return {
+      value: task?.id,
+      name: `${list.indexOf(task) + 1}.`.green + ` ${task?.description}`,
+      checked: !(task.completedDate === null),
+    };
+  });
+
+  const questions = {
+    type: "checkbox",
+    name: "ids",
+    message: "Complete a task or tasks",
+    choices,
+  };
+  const { ids } = await inquirer.prompt(questions);
+  return ids;
+};
+
+module.exports = {
+  inquirerMenu,
+  pause,
+  userInput,
+  listOfTasks,
+  confirm,
+  tasksToChangeStatus,
+};

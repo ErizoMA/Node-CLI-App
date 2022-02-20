@@ -5,6 +5,7 @@ const {
   userInput,
   listOfTasks,
   confirm,
+  tasksToChangeStatus,
 } = require("./helpers/inquirer");
 const { saveData, readData } = require("./helpers/store");
 const Tasks = require("./models/tasks");
@@ -21,7 +22,7 @@ const main = async () => {
     option = await inquirerMenu();
     switch (option) {
       case "1":
-        description = await userInput("What task would you like to add ...");
+        description = await userInput("Task: ");
         tasks.createTask(description);
         break;
       case "2":
@@ -34,15 +35,19 @@ const main = async () => {
         tasks.tasksByStatus(false);
         break;
       case "5":
+        const ids = await tasksToChangeStatus(tasks.listArray);
+        tasks.toggleTasks(ids);
         break;
       case "6":
         const id = await listOfTasks(tasks.listArray);
-        const confirmed = await confirm("Are you sure?");
-        if (confirmed) {
-          tasks.deleteTask(id);
+        if (id !== 0) {
+          const confirmed = await confirm("Are you sure?");
+          if (confirmed) {
+            tasks.deleteTask(id);
+            console.log("Task deleted correctly");
+          }
         }
         break;
-
       default:
         break;
     }

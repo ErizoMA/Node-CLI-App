@@ -16,7 +16,7 @@ class Tasks {
   }
 
   loadTasks(list = []) {
-    list.forEach((task) => (this._list[task.id] = task));
+    list.forEach((task) => (this._list[task?.id] = task));
   }
   createTask(description) {
     const task = new Task(description);
@@ -27,8 +27,8 @@ class Tasks {
     this.listArray.map((task) => {
       console.log(
         `${(this.listArray.indexOf(task) + 1).toString().green}. ${
-          task.description
-        } :: ${task.completedDate ? "Completed".green : "Pending".red}`
+          task?.description
+        } :: ${task?.completedDate ? "Completed".green : "Pending".red}`
       );
     });
   }
@@ -42,7 +42,9 @@ class Tasks {
       console.log(
         `${(filteredTasks.indexOf(task) + 1).toString().green}. ${
           task.description
-        } :: ${task.completedDate ? "Completed".green : "Pending".red}`
+        } :: ${
+          task.completedDate ? `${task.completedDate}`.green : "Pending".red
+        }`
       );
     });
   }
@@ -50,6 +52,16 @@ class Tasks {
     if (this._list[id]) {
       delete this._list[id];
     }
+  }
+
+  toggleTasks(listOfIds = []) {
+    listOfIds.forEach((id) => (this._list[id].completedDate = new Date()));
+
+    this.listArray.forEach((task) => {
+      if (!listOfIds.includes(task.id)) {
+        this._list[task.id].completedDate = null;
+      }
+    });
   }
 }
 
