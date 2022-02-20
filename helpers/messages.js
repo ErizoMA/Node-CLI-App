@@ -1,5 +1,5 @@
 require("colors");
-
+// This might be a tedious way to create a CLI interface with node, thats why we will be using inquirer
 const showMenu = () => {
   console.clear();
   console.log("=".repeat(16).green);

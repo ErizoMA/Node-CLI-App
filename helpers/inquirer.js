@@ -34,6 +34,7 @@ const menuOptions = {
     {
       value: "6",
       name: `${"6.".green} Delete a task`,
+      short: "".hidden,
     },
     {
       value: "0",
