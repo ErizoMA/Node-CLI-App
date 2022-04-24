@@ -1,6 +1,6 @@
 # ToDos Interactive CLI
 ## Preview 
-![image](https://im2.ezgif.com/tmp/ezgif-2-078ac7868e.gif)
+![image](https://res.cloudinary.com/djzj5tbgw/image/upload/v1650777089/NodeApp/NodeApp_zo84kh.gif)
 ## Project setup
 ```
 npm install 
